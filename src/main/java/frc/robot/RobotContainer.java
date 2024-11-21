@@ -58,6 +58,7 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> driveFieldCentric.withVelocityX(driverController.getRightX() * speed.getAsDouble()) //fieldCentric
         .withVelocityY(driverController.getLeftY() * speed.getAsDouble())
         .withRotationalRate(driverController.getRightY() * MaxAngularRate)));
+    //TODO: add a changer for the drive type with a button between driveFieldCentric and driveRobotCentric and driveFacingAngle
       
 
     driverController.leftBumper().whileTrue(drivetrain.applyRequest(() ->

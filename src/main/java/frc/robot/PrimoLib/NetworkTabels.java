@@ -58,6 +58,8 @@ public class NetworkTabels {
     public static void updateVision(){
         SmartDashboard.putBoolean("April tag detection", leftAprilTagCamera.seeTarget() || rightAprilTagCamera.seeTarget());
     }
+    
+    //TODO: add Command schedule
 
 
 

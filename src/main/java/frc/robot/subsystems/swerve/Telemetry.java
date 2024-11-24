@@ -92,14 +92,14 @@ public class Telemetry {
         double diffTime = currentTime - lastTime;
         lastTime = currentTime;
         Translation2d distanceDiff = pose.minus(m_lastPose).getTranslation();
-        m_lastPose = pose;
+        m_lastPose = pose; // Update the last known pose to the current pose
 
-        Translation2d velocities = distanceDiff.div(diffTime);
+        Translation2d velocities = distanceDiff.div(diffTime); // robot velocity- change in position / by the time difference
 
-        speed.set(velocities.getNorm());
+        speed.set(velocities.getNorm()); // spped calculation
         velocityX.set(velocities.getX());
         velocityY.set(velocities.getY());
-        odomFreq.set(1.0 / state.OdometryPeriod);
+        odomFreq.set(1.0 / state.OdometryPeriod); //how often the odometry data is published
 
         /* Telemeterize the module's states */
         for (int i = 0; i < 4; ++i) {
@@ -109,10 +109,13 @@ public class Telemetry {
 
             SmartDashboard.putData("Module " + i, m_moduleMechanisms[i]);
         }
-
+        //adding to log file:
+        //adding pos:
         SignalLogger.writeDoubleArray("odometry",
                 new double[] { pose.getX(), pose.getY(), pose.getRotation().getDegrees() });
+                //The measured odometry update period (in seconds):
         SignalLogger.writeDouble("odom period", state.OdometryPeriod, "seconds");
     }
+    //robot pose:
     public Pose2d getRobotPose() {return m_lastPose;}
 }
